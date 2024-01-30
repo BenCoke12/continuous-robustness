@@ -7,8 +7,8 @@ type Input = Vector Rat 3
 validElement : Rat -> Bool
 validElement element = 0 <= element <= 1
 
-validInput : input -> Bool
-validInput = forall i . validElement (input ! i)
+validInput : Input -> Bool
+validInput input = forall i . validElement (input ! i)
 
 --The network takes an input containing:
 --Saturation at step n-1 
@@ -16,7 +16,7 @@ validInput = forall i . validElement (input ! i)
 --Saturation at step n
 --It returns the releative permeability at step n
 @network
-regression : Input -> Rat
+regression : Input -> Vector Rat 1
 
 --The radius of the ball that we are checking within
 @parameter
@@ -28,7 +28,11 @@ epsilon : Rat
 targetWithinEpsilon : Input -> Rat -> Bool
 targetWithinEpsilon input target = 
     validInput input =>
-        target - epsilon <= regression input <= target + epsilon
+        target - epsilon <= regression input ! 0 <= target + epsilon
+
+--infer dataset size from datasets given
+@parameter (infer=True)
+n : Nat
 
 --Datasets in idx format, inputs and targets
 @dataset
