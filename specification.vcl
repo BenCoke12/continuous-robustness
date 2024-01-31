@@ -27,8 +27,8 @@ epsilon : Rat
 --i.e. target - epsilon <= output <= target + epsilon
 targetWithinEpsilon : Input -> Rat -> Bool
 targetWithinEpsilon input target = 
-    validInput input =>
-        target - epsilon <= regression input ! 0 <= target + epsilon
+        validInput input =>
+            target - epsilon <= regression input ! 0 <= target + epsilon
 
 --infer dataset size from datasets given
 @parameter (infer=True)
